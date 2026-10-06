@@ -3,7 +3,9 @@
 //! Platform renderers (macOS, Windows, Linux) depend on this crate for:
 //! - `CursorConfig` — theme, accessibility, visibility, and motion settings
 //! - `MotionConfig` — glide duration, spring, dwell, idle-hide timings
-//! - `CubicBezier` + `PathPlanner` — Bezier path math (ported 1:1 from C#)
+//! - `CubicBezier` + `PathPlanner` — Bezier path math (from Cua Driver's Swift
+//!   `Bezier.swift` / `CursorMotionPath.swift`; arc-length helper after
+//!   trope-cua, see THIRD_PARTY_NOTICES.md)
 //! - `OverlayCommand` — messages sent from MCP tools to the overlay thread
 //! - `SurfaceFit` — keeps each platform's overlay surface fitted to the live
 //!   display geometry, so screen-coordinate cursors stay on the pointer
