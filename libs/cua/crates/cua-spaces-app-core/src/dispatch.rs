@@ -16,8 +16,8 @@ use crate::teleport::{drag, flow, grid, transfer, windows};
 use crate::{
     CoreError, about, agent_keys, agents, cloud_connect, devices, drive_mount_preview, drive_page,
     drive_settings, driver_preview, experiments, host, login_item, machines, notch, notifications,
-    onboarding, onboarding_preview, paths, persistent, presence, settings, share, telemetry,
-    window, wizard,
+    onboarding, onboarding_preview, paths, persistent, presence, relay_usage, settings, share,
+    telemetry, window, wizard,
 };
 use serde::Serialize;
 use serde::de::DeserializeOwned;
@@ -278,6 +278,7 @@ pub const METHODS: &[&str] = &[
     "experiments.page",
     "experiments.choose",
     "wizard.placementOptions",
+    "relayUsage.view",
 ];
 
 struct Args(Value);
@@ -450,6 +451,7 @@ pub fn call_value(method: &str, args: Value) -> Result<Value, CoreError> {
             a.get::<Option<SpaceOs>>("hostOs")?
                 .unwrap_or(SpaceOs::Macos),
         )),
+        "relayUsage.view" => out(relay_usage::view(&a.get("usage")?)),
         "wizard.pickerImages" => out(wizard::picker_images()),
         "wizard.pickerGroups" => out(wizard::picker_groups()),
         "wizard.findImage" => out(wizard::find_image(&a.get::<String>("ref")?)),
